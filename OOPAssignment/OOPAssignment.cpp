@@ -1,21 +1,83 @@
 // OOPAssignment.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "pch.h"
+
 #include <iostream>
+#include<string>
+#include"ticket.h"
+#include"show.h"
+#include"customer.h"
+#includes"showSeat.h"
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	string a,
+		b,
+		c,
+		f,
+		g,
+		h;
+
+	int d;
+
+	double e;
+
+	char ch,
+		terminator;
+
+	//objects
+
+	showSheat SEAT;
+	customer CUST;
+	show SHOW;
+	ticket*TICK;
+
+	//getting customers information
+
+	CUST.getLogin();
+	CUST.getProfileInfo(f, g, h);
+
+	//display main menu and allow customer to choose option
+
+	system("CLS");
+
+	cout << "\n-------------------------MAIN MENU-----------------------\n" << endl;
+	cout << "1. Buy Tickets for upcoming shows" << endl;
+	cout << "2. Log out\n" << endl;
+	cout << "Please enter a menu choice number: ";
+	cin.get(ch);
+
+	while (ch != '1' && ch != '2')
+	{
+		cin.clear();
+		cin.ignore(100, '\n'); //ensure buffer is completely clear
+		cout << "Please select a valid menu choice number: ";
+		cin.get(ch);
+
+	}
+	if (ch == '2')
+	{
+		return EXIT_SUCCESS;
+	}
+
+	do
+	{
+		SHOW.selectShow(a, b);
+		c = SHOW.selectTime();
+
+		do
+		{
+			cout << "\n Are you happy with your choice(Y=Yes, N=No)?: ";
+			cin.get(ch);
+
+		} while (ch != 'Y' && ch != 'y' && ch != 'N' && ch != 'n');
+		cin.get(terminator);
+	}
+	while (ch == 'N' || ch == 'n');
+
+	//deals with selecting seat and calculating price
+
+	SEAT.initialiseFloorPlan();
+	d = SEAT.getNumSeats();
+	e = SEAT.getSeatSelection();
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
